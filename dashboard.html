@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Dashboard - ServeX</title>
+    <link rel='stylesheet' href='style.css'>
+    <script src="db.js"></script>
+    <script>if (!sessionStorage.getItem('auth')) window.location.href = 'login.html';</script>
+</head>
+
+<body>
+    <div class="layout-app">
+        <aside class="sidebar">
+            <a href="index.html" class="logo">Serve<span>X</span></a>
+            <a href="dashboard.html" class="active">🏠 Dashboard</a>
+            <a href="services.html">✨ Services</a>
+            <a href="account.html">👤 Account</a>
+            <a href="support.html">❓ Help & Support</a>
+            <div style="flex:1"></div>
+            <a href="index.html" onclick="sessionStorage.clear()" style="margin-top:auto;">🚪 Log Out</a>
+        </aside>
+
+        <main class="layout-content">
+            <div class="header-top">
+                <div>
+                    <h1 style="margin-bottom: 0;">Welcome back!</h1>
+                    <p style="margin: 0; color: #a0a0a0;">Ready to book your next service?</p>
+                </div>
+            </div>
+
+            <div class="grid" style="grid-template-columns: 1fr 1fr; margin-top: 2rem;">
+                <div class="card" style="padding: 0; display: flex; flex-direction: column;">
+                    <div
+                        style="height: 200px; background: url('resource/dashboard_services.png') center/cover; border-bottom: 1px solid #222;">
+                    </div>
+                    <div style="padding: 2rem; flex: 1; display: flex; flex-direction: column;">
+                        <h3>Book a New Service</h3>
+                        <p style="margin-bottom: 1.5rem; flex: 1;">Explore our wide range of premium services including
+                            Salon, Cleaning, Repair, and Smart Home setups.</p>
+                        <a href="services.html" class="btn btn-outline"
+                            style="background: #fff; color: #00070a; border: 1px solid #31bde4; width: fit-content;">Explore
+                            Services</a>
+                    </div>
+                </div>
+                <div class="card" style="padding: 0; display: flex; flex-direction: column;">
+                    <div
+                        style="height: 200px; background: url('resource/dashboard_account.png') center/cover; border-bottom: 1px solid #222;">
+                    </div>
+                    <div style="padding: 2rem; flex: 1; display: flex; flex-direction: column;">
+                        <h3>Manage Account</h3>
+                        <p style="margin-bottom: 1.5rem; flex: 1;">Update your profile, review your spending, manage
+                            billing information, and adjust preferences.</p>
+                        <a href="account.html" class="btn btn-outline"
+                            style="background: #fff; color: #010708; border: 1px solid #31bde4; width: fit-content;">View
+                            Account</a>
+                    </div>
+                </div>
+            </div>
+
+
+        </main>
+    </div>
+
+    <a href="cart.html" class="floating-cart" id="floatingCart" style="display: none;" title="View Cart">🛒</a>
+    <script>
+        if (DB.getCart().length > 0) document.getElementById('floatingCart').style.display = 'flex';
+    </script>
+</body>
+
+</html>

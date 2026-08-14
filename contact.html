@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - ServeX</title>
+    
+<link rel='stylesheet' href='style.css'>
+
+<script>if(!sessionStorage.getItem('auth')) window.location.href='login.html';</script>
+</head>
+<body>
+    
+<header>
+    <a href="index.html" class="logo">Serve<span>X</span></a>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="services.html">Services</a>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="cart.html">Cart</a>
+        <a href="login.html" class="btn btn-outline" style="padding: 0.4rem 1.2rem; margin-left: 2rem;">Log In</a>
+    </nav>
+</header>
+
+    <main>
+        
+        <div class="form-box">
+            <h2>Contact Us</h2>
+            <p>Send us a message and we'll get back to you shortly.</p>
+            <form>
+                <label>Name</label>
+                <input type="text" required>
+                <label>Email</label>
+                <input type="email" required>
+                <label>Message</label>
+                <textarea rows="4" required></textarea>
+                <button type="submit" class="btn" style="width: 100%;">Send Message</button>
+            </form>
+        </div>
+    
+    </main>
+    
+<footer>
+    <p>&copy; 2026 ServeX Inc. All rights reserved. | <a href="contact.html" style="color:#00e5ff;text-decoration:none;">Contact</a> | <a href="support.html" style="color:#00e5ff;text-decoration:none;">Support</a></p>
+</footer>
+
+</body>
+</html>

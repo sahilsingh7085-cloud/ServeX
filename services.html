@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Services - ServeX</title>
+    <link rel='stylesheet' href='style.css'>
+    <script src="db.js"></script>
+    <script>if(!sessionStorage.getItem('auth')) window.location.href='login.html';</script>
+</head>
+<body>
+<div class="layout-app">
+    <aside class="sidebar">
+        <a href="index.html" class="logo">Serve<span>X</span></a>
+        <a href="dashboard.html">🏠 Dashboard</a>
+        <a href="services.html" class="active">✨ Services</a>
+        <a href="account.html">👤 Account</a>
+        <a href="support.html">❓ Help & Support</a>
+        <div style="flex:1"></div>
+        <a href="index.html" onclick="sessionStorage.clear()" style="margin-top:auto;">🚪 Log Out</a>
+    </aside>
+
+    <main class="layout-content">
+        <h1>All Services</h1>
+        <p style="margin-bottom: 2rem;">Browse our catalog of premium, vetted professionals ready to assist you at your doorstep.</p>
+        
+
+        
+        <div style="color: #a0a0a0; margin-bottom: 2rem; font-weight: bold;">6 services found</div>
+
+        <div class="card-horizontal">
+            <div class="img-wrapper">
+                <img src="resource/salon_spa.png" alt="Salon">
+            </div>
+            <div class="card-content">
+                <div style="color: #a0a0a0; font-size: 0.9rem; margin-bottom: 0.5rem;">Wellness</div>
+                <h2 style="margin-bottom: 0.5rem;">Salon & Spa at Home</h2>
+                <p>Experience luxury salon services without leaving your house. Our certified beauticians bring premium products and expertise right to your living room.</p>
+                <div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
+                    <span style="background: rgba(255,255,255,0.05); padding: 0.4rem 1rem; border-radius: 50px; font-size: 0.85rem; color: #a0a0a0;">✓ Certified Professionals</span>
+                    <span style="background: rgba(255,255,255,0.05); padding: 0.4rem 1rem; border-radius: 50px; font-size: 0.85rem; color: #a0a0a0;">✓ Premium Products</span>
+                </div>
+                <div class="card-actions">
+                    <div class="price">₹2900 <span style="font-size: 1rem; font-weight: normal; color: #a0a0a0;">/ session</span></div>
+                    <a href="service-salon.html" class="btn btn-outline" style="padding: 0.6rem 1.5rem;">View</a>
+                    <button onclick="DB.addToCart('Salon & Spa', 2900);" class="btn btn-outline" style="padding: 0.6rem 1.5rem; background: rgba(0,229,255,0.1); border-color: #00e5ff; color: #00e5ff;">Add to Cart</button>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="card-horizontal">
+            <div class="img-wrapper">
+                <img src="resource/repair_service.png" alt="Repair">
+            </div>
+            <div class="card-content">
+                <div style="color: #a0a0a0; font-size: 0.9rem; margin-bottom: 0.5rem;">Home Care</div>
+                <h2 style="margin-bottom: 0.5rem;">Home Repair & Maintenance</h2>
+                <p>Expert fixes for all household issues. Our certified technicians handle electrical, plumbing, and appliance repairs efficiently and safely.</p>
+                <div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
+                    <span style="background: rgba(255,255,255,0.05); padding: 0.4rem 1rem; border-radius: 50px; font-size: 0.85rem; color: #a0a0a0;">✓ Quick Response</span>
+                    <span style="background: rgba(255,255,255,0.05); padding: 0.4rem 1rem; border-radius: 50px; font-size: 0.85rem; color: #a0a0a0;">✓ 30-Day Guarantee</span>
+                </div>
+                <div class="card-actions">
+                    <div class="price">₹1299 <span style="font-size: 1rem; font-weight: normal; color: #a0a0a0;">/ repair</span></div>
+                    <a href="service-repair.html" class="btn btn-outline" style="padding: 0.6rem 1.5rem;">View</a>
+                    <button onclick="DB.addToCart('Home Repair', 1299);" class="btn btn-outline" style="padding: 0.6rem 1.5rem; background: rgba(0,229,255,0.1); border-color: #00e5ff; color: #00e5ff;">Add to Cart</button>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="card-horizontal">
+            <div class="img-wrapper">
+                <img src="resource/cleaning_service.png" alt="Cleaning">
+            </div>
+            <div class="card-content">
+                <div style="color: #a0a0a0; font-size: 0.9rem; margin-bottom: 0.5rem;">Home Care</div>
+                <h2 style="margin-bottom: 0.5rem;">Deep Home Cleaning</h2>
+                <p>Comprehensive cleaning for a spotless home environment. We use eco-friendly products and advanced equipment to ensure every corner shines.</p>
+                <div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
+                    <span style="background: rgba(255,255,255,0.05); padding: 0.4rem 1rem; border-radius: 50px; font-size: 0.85rem; color: #a0a0a0;">✓ Eco-Friendly</span>
+                    <span style="background: rgba(255,255,255,0.05); padding: 0.4rem 1rem; border-radius: 50px; font-size: 0.85rem; color: #a0a0a0;">✓ Deep Scrub</span>
+                </div>
+                <div class="card-actions">
+                    <div class="price">₹3900 <span style="font-size: 1rem; font-weight: normal; color: #a0a0a0;">/ session</span></div>
+                    <a href="service-cleaning.html" class="btn btn-outline" style="padding: 0.6rem 1.5rem;">View</a>
+                    <button onclick="DB.addToCart('Deep Cleaning', 3900);" class="btn btn-outline" style="padding: 0.6rem 1.5rem; background: rgba(0,229,255,0.1); border-color: #00e5ff; color: #00e5ff;">Add to Cart</button>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="card-horizontal">
+            <div class="img-wrapper">
+                <img src="resource/transport_service.png" alt="Transport">
+            </div>
+            <div class="card-content">
+                <div style="color: #a0a0a0; font-size: 0.9rem; margin-bottom: 0.5rem;">Transport</div>
+                <h2 style="margin-bottom: 0.5rem;">Private Transport</h2>
+                <p>Need to get somewhere quickly and comfortably? Book a premium ride with ServeX. We offer sedans, SUVs, and luxury vehicles.</p>
+                <div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
+                    <span style="background: rgba(255,255,255,0.05); padding: 0.4rem 1rem; border-radius: 50px; font-size: 0.85rem; color: #a0a0a0;">✓ Professional Drivers</span>
+                    <span style="background: rgba(255,255,255,0.05); padding: 0.4rem 1rem; border-radius: 50px; font-size: 0.85rem; color: #a0a0a0;">✓ Luxury Fleet</span>
+                </div>
+                <div class="card-actions">
+                    <div class="price">₹1200 <span style="font-size: 1rem; font-weight: normal; color: #a0a0a0;">/ hour</span></div>
+                    <a href="service-transport.html" class="btn btn-outline" style="padding: 0.6rem 1.5rem;">View</a>
+                    <button onclick="DB.addToCart('Private Transport', 1200);" class="btn btn-outline" style="padding: 0.6rem 1.5rem; background: rgba(0,229,255,0.1); border-color: #00e5ff; color: #00e5ff;">Add to Cart</button>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="card-horizontal">
+            <div class="img-wrapper">
+                <img src="resource/chef_service.png" alt="Chef">
+            </div>
+            <div class="card-content">
+                <div style="color: #a0a0a0; font-size: 0.9rem; margin-bottom: 0.5rem;">Lifestyle</div>
+                <h2 style="margin-bottom: 0.5rem;">Personal Chef</h2>
+                <p>Fine dining experiences at home. Hire a top-tier culinary expert to cook specialized meals or host dinner parties tailored to your diet.</p>
+                <div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
+                    <span style="background: rgba(255,255,255,0.05); padding: 0.4rem 1rem; border-radius: 50px; font-size: 0.85rem; color: #a0a0a0;">✓ Master Chefs</span>
+                    <span style="background: rgba(255,255,255,0.05); padding: 0.4rem 1rem; border-radius: 50px; font-size: 0.85rem; color: #a0a0a0;">✓ Custom Menus</span>
+                </div>
+                <div class="card-actions">
+                    <div class="price">₹6000 <span style="font-size: 1rem; font-weight: normal; color: #a0a0a0;">/ event</span></div>
+                    <a href="service-chef.html" class="btn btn-outline" style="padding: 0.6rem 1.5rem;">View</a>
+                    <button onclick="DB.addToCart('Personal Chef', 6000);" class="btn btn-outline" style="padding: 0.6rem 1.5rem; background: rgba(0,229,255,0.1); border-color: #00e5ff; color: #00e5ff;">Add to Cart</button>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="card-horizontal">
+            <div class="img-wrapper">
+                <img src="resource/smart_home_service.png" alt="Smart Home">
+            </div>
+            <div class="card-content">
+                <div style="color: #a0a0a0; font-size: 0.9rem; margin-bottom: 0.5rem;">Tech & Smart</div>
+                <h2 style="margin-bottom: 0.5rem;">Smart Home Automation</h2>
+                <p>IoT setup and home automation. Upgrade your living space with intelligent lighting, security, and smart appliances.</p>
+                <div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
+                    <span style="background: rgba(255,255,255,0.05); padding: 0.4rem 1rem; border-radius: 50px; font-size: 0.85rem; color: #a0a0a0;">✓ Expert Installation</span>
+                    <span style="background: rgba(255,255,255,0.05); padding: 0.4rem 1rem; border-radius: 50px; font-size: 0.85rem; color: #a0a0a0;">✓ Smart Tech</span>
+                </div>
+                <div class="card-actions">
+                    <div class="price">₹4500 <span style="font-size: 1rem; font-weight: normal; color: #a0a0a0;">/ setup</span></div>
+                    <a href="service-smart.html" class="btn btn-outline" style="padding: 0.6rem 1.5rem;">View</a>
+                    <button onclick="DB.addToCart('Smart Home Automation', 4500);" class="btn btn-outline" style="padding: 0.6rem 1.5rem; background: rgba(0,229,255,0.1); border-color: #00e5ff; color: #00e5ff;">Add to Cart</button>
+
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+<a href="cart.html" class="floating-cart" id="floatingCart" style="display: none;" title="View Cart">🛒</a>
+<script>if(DB.getCart().length > 0) document.getElementById('floatingCart').style.display='flex';</script>
+</body>
+</html>

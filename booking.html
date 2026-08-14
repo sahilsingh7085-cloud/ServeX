@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Service - ServeX</title>
+    
+<link rel='stylesheet' href='style.css'>
+
+<script>if(!sessionStorage.getItem('auth')) window.location.href='login.html';</script>
+</head>
+<body>
+<div class="layout-app">
+    <aside class="sidebar">
+        <a href="index.html" class="logo">Serve<span>X</span></a>
+        <a href="dashboard.html">🏠 Dashboard</a>
+        <a href="services.html">✨ Services</a>
+        <a href="account.html">👤 Account</a>
+        <a href="support.html">❓ Help & Support</a>
+        <div style="flex:1"></div>
+        <a href="index.html" onclick="sessionStorage.clear()" style="margin-top:auto;">🚪 Log Out</a>
+    </aside>
+
+    <main class="layout-content">
+        <div class="form-box" style="margin: 0;">
+            <h2>Book Your Service</h2>
+            <p>Fill out the details below to schedule your appointment.</p>
+            <form action="cart.html">
+                <label>Select Date</label>
+                <input type="date" required>
+                <label>Select Time</label>
+                <input type="time" required>
+                <label>Address</label>
+                <textarea rows="3" required></textarea>
+                <button type="submit" class="btn" style="width: 100%;">Add to Cart</button>
+            </form>
+        </div>
+    </main>
+</div>
+<a href="cart.html" class="floating-cart" id="floatingCart" style="display: none;" title="View Cart">🛒</a>
+<script>if(sessionStorage.getItem('cartItems')) document.getElementById('floatingCart').style.display='flex';</script>
+</body>
+</html>

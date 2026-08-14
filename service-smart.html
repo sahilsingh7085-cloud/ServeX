@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Home - ServeX</title>
+    <link rel='stylesheet' href='style.css'>
+    <script src="db.js"></script>
+    <script>if(!sessionStorage.getItem('auth')) window.location.href='login.html';</script>
+</head>
+<body>
+<div class="layout-app">
+    <aside class="sidebar">
+        <a href="index.html" class="logo">Serve<span>X</span></a>
+        <a href="dashboard.html">🏠 Dashboard</a>
+        <a href="services.html" class="active">✨ Services</a>
+        <a href="account.html">👤 Account</a>
+        <a href="support.html">❓ Help & Support</a>
+        <div style="flex:1"></div>
+        <a href="index.html" onclick="sessionStorage.clear()">🚪 Log Out</a>
+    </aside>
+
+    <main class="layout-content">
+        <div style="position: relative; border-radius: 16px; overflow: hidden; height: 250px; margin-bottom: 3rem;">
+            <video autoplay loop muted playsinline style="width: 100%; height: 100%; object-fit: cover;">
+                <source src="resource/smart_video.mp4" type="video/mp4">
+            </video>
+            <div style="position: absolute; inset: 0; background: rgba(0,0,0,0.5); display: flex; flex-direction: column; justify-content: center; padding: 2rem;">
+                <div class="badge" style="width: fit-content;">Technology</div>
+                <h1 style="margin:0;">Smart Home</h1>
+            </div>
+        </div>
+
+        <p style="margin-bottom: 3rem; font-size: 1.1rem; max-width: 800px;">IoT setup and home automation. Upgrade your living space with intelligent lighting, security, and smart appliances.</p>
+        
+        <div class="grid">
+            <div class="card">
+                <h3>Basic Setup</h3>
+                <div class="price">₹1999</div>
+                <p>Essential smart home setup for beginners.</p>
+                <ul>
+                    <li>Smart Speaker Setup</li>
+                    <li>2 Smart Lights Config</li>
+                    <li>Wi-Fi Troubleshooting</li>
+                </ul>
+                <button onclick="DB.addToCart('Basic Setup', 1999);" class="btn btn-outline" style="width: 100%;">Add to Cart</button>
+            </div>
+            <div class="card" style="border-color: #00e5ff;">
+                <div class="badge" style="position: absolute; top: 1rem; right: 1rem; margin: 0;">Popular</div>
+                <h3>Home Security</h3>
+                <div class="price">₹4500</div>
+                <p>Secure your perimeter with smart locks and cameras.</p>
+                <ul>
+                    <li>Smart Lock Installation</li>
+                    <li>2 Security Cameras</li>
+                    <li>Mobile App Pairing</li>
+                </ul>
+                <button onclick="DB.addToCart('Home Security', 4500);" class="btn" style="width: 100%;">Add to Cart</button>
+            </div>
+            <div class="card">
+                <h3>Total Automation</h3>
+                <div class="price">₹9900</div>
+                <p>Full integration of smart tech throughout your home.</p>
+                <ul>
+                    <li>Whole-home Audio</li>
+                    <li>Automated Curtains/Blinds</li>
+                    <li>Custom Voice Commands</li>
+                </ul>
+                <button onclick="DB.addToCart('Total Automation', 9900);" class="btn btn-outline" style="width: 100%;">Add to Cart</button>
+            </div>
+        </div>
+    </main>
+</div>
+<a href="cart.html" class="floating-cart" id="floatingCart" style="display: none;" title="View Cart">🛒</a>
+<script>if(DB.getCart().length > 0) document.getElementById('floatingCart').style.display='flex';</script>
+</body>
+</html>

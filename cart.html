@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Cart - ServeX</title>
+    <link rel='stylesheet' href='style.css'>
+    <script src="db.js"></script>
+    <script>if(!sessionStorage.getItem('auth')) window.location.href='login.html';</script>
+</head>
+<body>
+<div class="layout-app">
+    <aside class="sidebar">
+        <a href="index.html" class="logo">Serve<span>X</span></a>
+        <a href="dashboard.html">🏠 Dashboard</a>
+        <a href="services.html">✨ Services</a>
+        <a href="account.html">👤 Account</a>
+        <a href="support.html">❓ Help & Support</a>
+        <div style="flex:1"></div>
+        <a href="index.html" onclick="sessionStorage.clear()" style="margin-top:auto;">🚪 Log Out</a>
+    </aside>
+
+    <main class="layout-content">
+        <h1>Your Cart</h1>
+        <div class="card" style="padding: 0; overflow: hidden; margin-top: 2rem;">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Service</th>
+                        <th>Price</th>
+                        <th style="text-align: right; padding-right: 1.5rem;">Action</th>
+                    </tr>
+                </thead>
+                <tbody id="cartTableBody">
+                    <!-- Dynamic content -->
+                </tbody>
+            </table>
+        </div>
+        
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-top: 2rem; gap: 2rem;">
+            <div style="background: rgba(255,255,255,0.02); padding: 1.5rem; border-radius: 12px; border: 1px dashed #333; flex: 1; max-width: 400px;">
+                <label style="color: #a0a0a0; font-size: 0.9rem; margin-bottom: 0.5rem; display: block;">Have a Promo Code?</label>
+                <div style="display: flex; gap: 0.5rem;">
+                    <input type="text" id="promoInput" placeholder="e.g. DISCOUNT10" style="margin: 0; background: #0a0a0a;">
+                    <button class="btn btn-outline" onclick="applyPromo()" style="white-space: nowrap;">Apply Code</button>
+                </div>
+                <div id="promoMessage" style="color: #00e5ff; font-size: 0.85rem; margin-top: 0.5rem; display: none;">Promo applied successfully!</div>
+            </div>
+            <div style="text-align: right;">
+                <h2 id="totalDisplay">Total: ₹0</h2>
+                <a href="checkout.html" id="checkoutBtn" class="btn" style="margin-top: 1rem;">Proceed to Checkout</a>
+            </div>
+        </div>
+    </main>
+</div>
+<script>
+    let cart = DB.getCart();
+    let discount = 0;
+
+    function renderCart() {
+        const tbody = document.getElementById('cartTableBody');
+        const checkoutBtn = document.getElementById('checkoutBtn');
+        checkoutBtn.style.display = cart.length ? 'inline-block' : 'none';
+
+        if (cart.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="3" style="text-align:center; color: #a0a0a0;">Cart is empty.</td></tr>';
+            document.getElementById('totalDisplay').innerText = 'Total: ₹0';
+            return;
+        }
+        let total = cart.reduce((acc, c) => acc + c.price, 0);
+        let discountedTotal = total - discount;
+        tbody.innerHTML = cart.map((c, i) => `<tr>
+            <td>
+                <div>${c.name}</div>
+                ${c.date ? `<div style="font-size:0.8rem; color:#a0a0a0; margin-top:0.4rem;">📅 ${c.date}</div>` : ''}
+                ${c.instructions ? `<div style="font-size:0.8rem; color:#a0a0a0; margin-top:0.2rem; font-style:italic; max-width: 250px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="${c.instructions}">📝 ${c.instructions}</div>` : ''}
+            </td>
+            <td style="vertical-align: top; padding-top: 1rem;">₹${c.price}</td>
+            <td style="text-align: right; padding-right: 1.5rem; vertical-align: top; padding-top: 1rem;">
+                <button onclick="removeItem(${i})" style="background: transparent; border: none; color: #ff4444; cursor: pointer; font-size: 1.2rem;" title="Remove Item">✖</button>
+            </td>
+        </tr>`).join('');
+        document.getElementById('totalDisplay').innerHTML = discount > 0 
+            ? `Total: <span style="text-decoration:line-through; font-size:1.2rem; color:#a0a0a0;">₹${total}</span> ₹${discountedTotal}`
+            : `Total: ₹${total}`;
+        sessionStorage.setItem('cartTotal', discountedTotal);
+    }
+
+    function removeItem(index) {
+        cart.splice(index, 1);
+        localStorage.setItem('servex_cart', JSON.stringify(cart));
+        if (cart.length === 0) {
+            discount = 0;
+            document.getElementById('promoInput').value = '';
+            document.getElementById('promoMessage').style.display = 'none';
+            document.getElementById('promoInput').style.borderColor = '#333';
+        } else if (document.getElementById('promoInput').value.trim() !== '') {
+            applyPromo();
+            return;
+        }
+        renderCart();
+    }
+
+    function applyPromo() {
+        const val = document.getElementById('promoInput').value.trim();
+        if (val === 'DISCOUNT10' && cart.length > 0) {
+            let total = cart.reduce((acc, c) => acc + c.price, 0);
+            discount = total * 0.1;
+            document.getElementById('promoMessage').style.display = 'block';
+            document.getElementById('promoMessage').style.color = '#00e5ff';
+            document.getElementById('promoMessage').innerText = 'Promo applied: 10% off!';
+            document.getElementById('promoInput').style.borderColor = '#00e5ff';
+            renderCart();
+        } else if (val === 'SERVE-JD200' && cart.length > 0) {
+            let total = cart.reduce((acc, c) => acc + c.price, 0);
+            discount = Math.min(200, total);
+            document.getElementById('promoMessage').style.display = 'block';
+            document.getElementById('promoMessage').style.color = '#00e5ff';
+            document.getElementById('promoMessage').innerText = 'Promo applied: ₹200 off!';
+            document.getElementById('promoInput').style.borderColor = '#00e5ff';
+            renderCart();
+        } else {
+            document.getElementById('promoMessage').style.display = 'block';
+            document.getElementById('promoMessage').style.color = '#ff4444';
+            document.getElementById('promoMessage').innerText = 'Invalid or empty promo code.';
+            document.getElementById('promoInput').style.borderColor = '#ff4444';
+        }
+    }
+    
+    renderCart();
+</script>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salon & Spa - ServeX</title>
+    <link rel='stylesheet' href='style.css'>
+    <script src="db.js"></script>
+    <script>if(!sessionStorage.getItem('auth')) window.location.href='login.html';</script>
+</head>
+<body>
+<div class="layout-app">
+    <aside class="sidebar">
+        <a href="index.html" class="logo">Serve<span>X</span></a>
+        <a href="dashboard.html">🏠 Dashboard</a>
+        <a href="services.html" class="active">✨ Services</a>
+        <a href="account.html">👤 Account</a>
+        <a href="support.html">❓ Help & Support</a>
+        <div style="flex:1"></div>
+        <a href="index.html" onclick="sessionStorage.clear()">🚪 Log Out</a>
+    </aside>
+
+    <main class="layout-content">
+        <a href="javascript:history.back()" style="display: inline-block; margin-bottom: 1rem; color: #00e5ff; text-decoration: none; font-weight: bold;">&larr; Back</a>
+        <div style="position: relative; border-radius: 16px; overflow: hidden; height: 250px; margin-bottom: 3rem;">
+            <video autoplay loop muted playsinline style="width: 100%; height: 100%; object-fit: cover;">
+                <source src="resource/salon_video.mp4" type="video/mp4">
+            </video>
+            <div style="position: absolute; inset: 0; background: rgba(0,0,0,0.5); display: flex; flex-direction: column; justify-content: center; padding: 2rem;">
+                <div class="badge" style="width: fit-content;">Wellness</div>
+                <h1 style="margin:0;">Salon & Spa at Home</h1>
+            </div>
+        </div>
+        <p style="margin-bottom: 3rem; font-size: 1.1rem; max-width: 800px;">Experience luxury salon services without leaving your house. Our certified beauticians bring premium products and expertise right to your living room.</p>
+        
+        <div class="grid">
+            <div class="card">
+                <h3>Basic Polish</h3>
+                <div class="price">₹1499</div>
+                <p>Essential grooming and basic styling for a quick refresh.</p>
+                <ul>
+                    <li>Standard Haircut</li>
+                    <li>Basic Manicure</li>
+                    <li>30-min Head Massage</li>
+                </ul>
+                <button onclick="DB.addToCart('Basic Polish', 1499);" class="btn btn-outline" style="width: 100%;">Add to Cart</button>
+            </div>
+            <div class="card" style="border-color: #00e5ff;">
+                <div class="badge" style="position: absolute; top: 1rem; right: 1rem; margin: 0;">Popular</div>
+                <h3>Classic Spa</h3>
+                <div class="price">₹2900</div>
+                <p>Our most popular package for a complete relaxation experience.</p>
+                <ul>
+                    <li>Premium Styling</li>
+                    <li>Mani & Pedi Combo</li>
+                    <li>60-min Full Body Massage</li>
+                </ul>
+                <button onclick="DB.addToCart('Classic Spa', 2900);" class="btn" style="width: 100%;">Add to Cart</button>
+            </div>
+            <div class="card">
+                <h3>Luxury Royale</h3>
+                <div class="price">₹4999</div>
+                <p>The ultimate indulgence with premium international products.</p>
+                <ul>
+                    <li>Advanced Styling & Color</li>
+                    <li>Spa Mani-Pedi</li>
+                    <li>90-min Aromatherapy</li>
+                </ul>
+                <button onclick="DB.addToCart('Luxury Royale', 4999);" class="btn btn-outline" style="width: 100%;">Add to Cart</button>
+            </div>
+        </div>
+    </main>
+</div>
+<a href="cart.html" class="floating-cart" id="floatingCart" style="display: none;" title="View Cart">🛒</a>
+<script>if(DB.getCart().length > 0) document.getElementById('floatingCart').style.display='flex';</script>
+</body>
+</html>

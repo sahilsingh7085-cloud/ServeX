@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deep Cleaning - ServeX</title>
+    <link rel='stylesheet' href='style.css'>
+    <script src="db.js"></script>
+    <script>if(!sessionStorage.getItem('auth')) window.location.href='login.html';</script>
+</head>
+<body>
+<div class="layout-app">
+    <aside class="sidebar">
+        <a href="index.html" class="logo">Serve<span>X</span></a>
+        <a href="dashboard.html">🏠 Dashboard</a>
+        <a href="services.html" class="active">✨ Services</a>
+        <a href="account.html">👤 Account</a>
+        <a href="support.html">❓ Help & Support</a>
+        <div style="flex:1"></div>
+        <a href="index.html" onclick="sessionStorage.clear()">🚪 Log Out</a>
+    </aside>
+
+    <main class="layout-content">
+        <div style="position: relative; border-radius: 16px; overflow: hidden; height: 250px; margin-bottom: 3rem;">
+            <video autoplay loop muted playsinline style="width: 100%; height: 100%; object-fit: cover;">
+                <source src="resource/cleaning_video.mp4" type="video/mp4">
+            </video>
+            <div style="position: absolute; inset: 0; background: rgba(0,0,0,0.5); display: flex; flex-direction: column; justify-content: center; padding: 2rem;">
+                <div class="badge" style="width: fit-content;">Sanitization</div>
+                <h1 style="margin:0;">Deep Cleaning</h1>
+            </div>
+        </div>
+
+        <p style="margin-bottom: 3rem; font-size: 1.1rem; max-width: 800px;">Comprehensive cleaning for a spotless home environment. We use eco-friendly products and advanced equipment to ensure every corner shines.</p>
+        
+        <div class="grid">
+            <div class="card">
+                <h3>Standard Clean</h3>
+                <div class="price">₹1499</div>
+                <p>Surface cleaning, dusting, and mopping for regular upkeep.</p>
+                <ul>
+                    <li>Living Area & Kitchen</li>
+                    <li>1 Bathroom</li>
+                    <li>Eco-Friendly Products</li>
+                </ul>
+                <button onclick="DB.addToCart('Standard Clean', 1499);" class="btn btn-outline" style="width: 100%;">Add to Cart</button>
+            </div>
+            <div class="card" style="border-color: #00e5ff;">
+                <div class="badge" style="position: absolute; top: 1rem; right: 1rem; margin: 0;">Popular</div>
+                <h3>Deep Scrub</h3>
+                <div class="price">₹3900</div>
+                <p>Intensive cleaning targeting grime, grease, and hidden areas.</p>
+                <ul>
+                    <li>Full Home Deep Clean</li>
+                    <li>Sofa & Carpet Vacuuming</li>
+                    <li>Stain Removal</li>
+                </ul>
+                <button onclick="DB.addToCart('Deep Scrub', 3900);" class="btn" style="width: 100%;">Add to Cart</button>
+            </div>
+            <div class="card">
+                <h3>Move-in/Move-out</h3>
+                <div class="price">₹6500</div>
+                <p>Ultimate top-to-bottom sanitization for empty or new homes.</p>
+                <ul>
+                    <li>Inside Cabinets & Appliances</li>
+                    <li>Balcony & Window Wash</li>
+                    <li>Pest Control Prep</li>
+                </ul>
+                <button onclick="DB.addToCart('Move-in/Move-out', 6500);" class="btn btn-outline" style="width: 100%;">Add to Cart</button>
+            </div>
+        </div>
+    </main>
+</div>
+<a href="cart.html" class="floating-cart" id="floatingCart" style="display: none;" title="View Cart">🛒</a>
+<script>if(DB.getCart().length > 0) document.getElementById('floatingCart').style.display='flex';</script>
+</body>
+</html>

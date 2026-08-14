@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Chef - ServeX</title>
+    <link rel='stylesheet' href='style.css'>
+    <script src="db.js"></script>
+    <script>if(!sessionStorage.getItem('auth')) window.location.href='login.html';</script>
+</head>
+<body>
+<div class="layout-app">
+    <aside class="sidebar">
+        <a href="index.html" class="logo">Serve<span>X</span></a>
+        <a href="dashboard.html">🏠 Dashboard</a>
+        <a href="services.html" class="active">✨ Services</a>
+        <a href="account.html">👤 Account</a>
+        <a href="support.html">❓ Help & Support</a>
+        <div style="flex:1"></div>
+        <a href="index.html" onclick="sessionStorage.clear()">🚪 Log Out</a>
+    </aside>
+
+    <main class="layout-content">
+        <div style="position: relative; border-radius: 16px; overflow: hidden; height: 250px; margin-bottom: 3rem;">
+            <video autoplay loop muted playsinline style="width: 100%; height: 100%; object-fit: cover;">
+                <source src="resource/chef_video.mp4" type="video/mp4">
+            </video>
+            <div style="position: absolute; inset: 0; background: rgba(0,0,0,0.5); display: flex; flex-direction: column; justify-content: center; padding: 2rem;">
+                <div class="badge" style="width: fit-content;">Culinary</div>
+                <h1 style="margin:0;">Personal Chef</h1>
+            </div>
+        </div>
+
+        <p style="margin-bottom: 3rem; font-size: 1.1rem; max-width: 800px;">Fine dining experiences at home. Hire a top-tier culinary expert to cook specialized meals, host dinner parties, or prepare weekly meal prep tailored to your diet.</p>
+        
+        <div class="grid">
+            <div class="card">
+                <h3>Meal Prep</h3>
+                <div class="price">₹2500 / day</div>
+                <p>Healthy, tailored meals prepared for your entire week.</p>
+                <ul>
+                    <li>Dietary Consultation</li>
+                    <li>Grocery Shopping</li>
+                    <li>3 Meals/Day Prep</li>
+                </ul>
+                <button onclick="DB.addToCart('Meal Prep', 2500);" class="btn btn-outline" style="width: 100%;">Add to Cart</button>
+            </div>
+            <div class="card" style="border-color: #00e5ff;">
+                <div class="badge" style="position: absolute; top: 1rem; right: 1rem; margin: 0;">Popular</div>
+                <h3>Dinner Party</h3>
+                <div class="price">₹6000 / event</div>
+                <p>Host an unforgettable evening with a curated multi-course menu.</p>
+                <ul>
+                    <li>Up to 6 Guests</li>
+                    <li>4-Course Fine Dining</li>
+                    <li>Kitchen Cleanup</li>
+                </ul>
+                <button onclick="DB.addToCart('Dinner Party', 6000);" class="btn" style="width: 100%;">Add to Cart</button>
+            </div>
+            <div class="card">
+                <h3>Masterclass</h3>
+                <div class="price">₹8500 / session</div>
+                <p>Learn to cook like a pro with a personalized cooking class.</p>
+                <ul>
+                    <li>Interactive Experience</li>
+                    <li>Gourmet Ingredients</li>
+                    <li>Take-Home Recipes</li>
+                </ul>
+                <button onclick="DB.addToCart('Masterclass', 8500);" class="btn btn-outline" style="width: 100%;">Add to Cart</button>
+            </div>
+        </div>
+    </main>
+</div>
+<a href="cart.html" class="floating-cart" id="floatingCart" style="display: none;" title="View Cart">🛒</a>
+<script>if(DB.getCart().length > 0) document.getElementById('floatingCart').style.display='flex';</script>
+</body>
+</html>

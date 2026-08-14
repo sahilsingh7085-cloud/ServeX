@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Help & Support - ServeX</title>
+    <link rel='stylesheet' href='style.css'>
+    <script src="db.js"></script>
+    <script>if (!sessionStorage.getItem('auth')) window.location.href = 'login.html';</script>
+</head>
+
+<body>
+    <div class="layout-app">
+        <aside class="sidebar">
+            <a href="index.html" class="logo">Serve<span>X</span></a>
+            <a href="dashboard.html">🏠 Dashboard</a>
+            <a href="services.html">✨ Services</a>
+            <a href="account.html">👤 Account</a>
+            <a href="support.html" class="active">❓ Help & Support</a>
+            <div style="flex:1"></div>
+            <a href="index.html" onclick="sessionStorage.clear()" style="margin-top:auto;">🚪 Log Out</a>
+        </aside>
+
+        <main class="layout-content" style="padding-top: 10rem;">
+            <h1 style="font-size: 3.5rem;">Help & Support</h1>
+            <p style="margin-bottom: 4rem;">How can we help you today?</p>
+
+            <div class="grid" style="grid-template-columns: repeat(3, 1fr);">
+                <div class="card" style="text-align: center; padding: 4rem 2rem;">
+                    <h3 style="margin-bottom: 1.5rem; font-size: 1.5rem;">FAQ</h3>
+                    <p style="flex: 1;">Find answers to common questions about bookings, payments, and accounts.</p>
+                    <button class="btn" style="width: 80%; margin: 0 auto; background: #fff; color: #000;"
+                        onclick="showSupport('faq')">View FAQ</button>
+                </div>
+
+                <div class="card" style="text-align: center; padding: 4rem 2rem;">
+                    <h3 style="margin-bottom: 1.5rem; font-size: 1.5rem;">Contact Us</h3>
+                    <p style="flex: 1;">Need to speak with a human? Reach out to our 24/7 customer support team.</p>
+                    <button class="btn" style="width: 80%; margin: 0 auto; background: #fff; color: #000;"
+                        onclick="showSupport('contact')">Contact Us</button>
+                </div>
+
+                <div class="card" style="text-align: center; padding: 4rem 2rem;">
+                    <h3 style="margin-bottom: 1.5rem; font-size: 1.5rem;">Terms & Policies</h3>
+                    <p style="flex: 1;">Read our policies regarding refunds, cancellations, and usage of the platform.
+                    </p>
+                    <button class="btn" style="width: 80%; margin: 0 auto; background: #fff; color: #000;"
+                        onclick="showSupport('policy')">View Policies</button>
+                </div>
+            </div>
+
+            <div id="supportContent"
+                style="display:none; margin-top: 3rem; background: rgba(255,255,255,0.02); padding: 3rem; border-radius: 16px; border: 1px solid #333;">
+                <h2 id="supportTitle" style="margin-bottom: 1.5rem;">Title</h2>
+                <div id="supportBody" style="color: #a0a0a0; font-size: 1.1rem; line-height: 1.8;">Body</div>
+            </div>
+        </main>
+    </div>
+
+    <a href="cart.html" class="floating-cart" id="floatingCart" style="display: none;" title="View Cart">🛒</a>
+    <script>
+        if (DB.getCart().length > 0) document.getElementById('floatingCart').style.display = 'flex';
+
+        function showSupport(type) {
+            const box = document.getElementById('supportContent');
+            const title = document.getElementById('supportTitle');
+            const body = document.getElementById('supportBody');
+
+            box.style.display = 'block';
+
+            if (type === 'faq') {
+                title.innerText = 'Frequently Asked Questions';
+                body.innerHTML = '<strong>How do I book a service?</strong><br>Navigate to the Services tab, browse our catalog, and click "Add to Cart".<br><br><strong>What if I need to cancel?</strong><br>Cancellations made 24 hours prior are fully refunded.';
+            } else if (type === 'contact') {
+                title.innerText = 'Contact Us';
+                body.innerHTML = 'Our support team is always here for you.<br><br>📧 Email: <a href="mailto:support@servex.com" style="color:#00e5ff;">support@servex.com</a><br>📞 Phone: 9885369069';
+            } else if (type === 'policy') {
+                title.innerText = 'Terms & Policies';
+                body.innerHTML = 'We prioritize your privacy and security. All transactions are securely processed. For our full terms of service and acceptable use policy, please download our comprehensive PDF guide.';
+            }
+
+            box.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    </script>
+</body>
+
+</html>

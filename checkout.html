@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - ServeX</title>
+    <link rel='stylesheet' href='style.css'>
+    <script src="db.js"></script>
+    <script>if(!sessionStorage.getItem('auth')) window.location.href='login.html';</script>
+</head>
+<body>
+<div class="layout-app">
+    <aside class="sidebar">
+        <a href="index.html" class="logo">Serve<span>X</span></a>
+        <a href="dashboard.html">🏠 Dashboard</a>
+        <a href="services.html">✨ Services</a>
+        <a href="account.html">👤 Account</a>
+        <a href="support.html">❓ Help & Support</a>
+        <div style="flex:1"></div>
+        <a href="index.html" onclick="sessionStorage.clear()" style="margin-top:auto;">🚪 Log Out</a>
+    </aside>
+
+    <main class="layout-content" style="display: flex; align-items: center; justify-content: center;">
+        <div class="form-box" style="margin: 0; width: 100%; max-width: 500px;">
+            <h2 style="text-align: center; margin-bottom: 2rem;">Checkout Details</h2>
+            <form onsubmit="processCheckout(event)">
+                <label>Card Number</label>
+                <input type="text" placeholder="XXXX-XXXX-XXXX" minlength="14" maxlength="14" oninput="this.value = this.value.replace(/\D/g, '').replace(/(.{4})/g, '$1-').replace(/-$/, '');" title="12-digit Card Number" required>
+                <div style="display:flex; gap:1rem;">
+                    <input type="text" placeholder="MM/YY" minlength="5" maxlength="5" oninput="this.value = this.value.replace(/\D/g, '').replace(/(.{2})/, '$1/').replace(/\/$/, '');" pattern="(0[1-9]|1[0-2])\/([0-9]{2})" title="Valid format: MM/YY (e.g. 12/26)" required>
+                    <input type="text" placeholder="CVV" minlength="3" maxlength="3" oninput="this.value = this.value.replace(/\D/g, '');" pattern="\d{3}" title="3 digit CVV" required>
+                </div>
+                <label>Name on Card</label>
+                <input type="text" required>
+                <button type="submit" id="payBtn" class="btn" style="width: 100%; background: #00e5ff; color: #000; margin-top: 1rem;">Pay ₹0</button>
+            </form>
+        </div>
+    </main>
+</div>
+<script>
+    let total = sessionStorage.getItem('cartTotal') || 0;
+    document.getElementById('payBtn').innerText = `Pay ₹${total}`;
+
+    function processCheckout(e) {
+        e.preventDefault();
+        const cart = DB.getCart();
+        if(cart.length === 0) {
+            alert("Your cart is empty!");
+            window.location.href = 'services.html';
+            return;
+        }
+        DB.addHistory(cart, parseFloat(total));
+        DB.clearCart();
+        alert('Payment Successful!');
+        window.location.href = 'dashboard.html';
+    }
+</script>
+</body>
+</html>

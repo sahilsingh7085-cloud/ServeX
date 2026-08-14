@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Settings - ServeX</title>
+    <link rel='stylesheet' href='style.css'>
+    <script src="db.js"></script>
+    <script>if (!sessionStorage.getItem('auth')) window.location.href = 'login.html';</script>
+</head>
+
+<body>
+    <div class="layout-app">
+        <aside class="sidebar">
+            <a href="index.html" class="logo">Serve<span>X</span></a>
+            <a href="dashboard.html">🏠 Dashboard</a>
+            <a href="services.html">✨ Services</a>
+            <a href="account.html" class="active">👤 Account</a>
+            <a href="support.html">❓ Help & Support</a>
+            <div style="flex:1"></div>
+            <a href="index.html" onclick="sessionStorage.clear()" style="margin-top:auto;">🚪 Log Out</a>
+        </aside>
+
+        <main class="layout-content">
+            <h1>Account Settings</h1>
+
+            <div class="grid" style="grid-template-columns: 1fr 1.5fr; margin-top: 3rem;">
+                <!-- Left Column: Form -->
+                <div class="card" style="padding: 3rem 2rem;">
+                    <h3 style="margin-bottom: 2rem;">Personal Information</h3>
+                    <form onsubmit="event.preventDefault(); alert('Info Updated!');">
+                        <label style="color: #a0a0a0; display: block; margin-bottom: 0.5rem; font-size: 0.9rem;">Full
+                            Name</label>
+                        <input type="text" value="Taneesh" style="padding: 0.8rem;" required>
+
+                        <label style="color: #a0a0a0; display: block; margin-bottom: 0.5rem; font-size: 0.9rem;">Email
+                            Address</label>
+                        <input type="email" value="Taneesh@gmail.com" style="padding: 0.8rem;" required>
+
+                        <label style="color: #a0a0a0; display: block; margin-bottom: 0.5rem; font-size: 0.9rem;">Phone
+                            Number</label>
+                        <input type="tel" value="9885369069" style="padding: 0.8rem;" required>
+
+                        <label style="color: #a0a0a0; display: block; margin-bottom: 0.5rem; font-size: 0.9rem;">Home
+                            Address</label>
+                        <input type="text" value="Coimbatore , Ettimadai" style="padding: 0.8rem;" required>
+
+                        <button type="submit" class="btn"
+                            style="width: 100%; background: #fff; color: #000; border: none; margin-top: 1rem;">Update
+                            Info</button>
+                    </form>
+                </div>
+
+                <!-- Right Column: Spending & History -->
+                <div class="card" style="padding: 3rem 2rem; display: flex; flex-direction: column;">
+                    <h3 style="margin-bottom: 2rem;">Spending & History</h3>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 3rem;">
+                        <div
+                            style="background: rgba(0,229,255,0.05); border: 1px solid #222; padding: 2rem; border-radius: 12px; text-align: center;">
+                            <div style="color: #a0a0a0; margin-bottom: 0.5rem;">Total Spent</div>
+                            <div id="totalSpentBox" style="font-size: 2.5rem; font-weight: bold; color: #00e5ff;">₹0
+                            </div>
+                        </div>
+                        <div
+                            style="background: rgba(0,229,255,0.05); border: 1px solid #222; padding: 2rem; border-radius: 12px; text-align: center;">
+                            <div style="color: #a0a0a0; margin-bottom: 0.5rem;">Total Bookings</div>
+                            <div id="totalBookingsBox" style="font-size: 2.5rem; font-weight: bold; color: #00e5ff;">0
+                            </div>
+                        </div>
+                    </div>
+
+                    <h3 style="margin-bottom: 1rem; font-size: 1.2rem;">Recent Transactions</h3>
+                    <div style="overflow-y: auto; flex: 1; margin: 0 -2rem; padding: 0 2rem;">
+                        <table class="table" style="margin: 0;">
+                            <thead>
+                                <tr>
+                                    <th style="color: #a0a0a0;">Service</th>
+                                    <th style="color: #a0a0a0;">Date</th>
+                                    <th style="color: #a0a0a0;">Amount</th>
+                                    <th style="color: #a0a0a0;">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="historyTableBody">
+                                <!-- Dynamic content -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <a href="cart.html" class="floating-cart" id="floatingCart" style="display: none;" title="View Cart">🛒</a>
+    <script>
+        const history = DB.getHistory();
+        const tbody = document.getElementById('historyTableBody');
+
+        document.getElementById('totalSpentBox').innerText = '₹' + DB.getTotalSpent();
+        document.getElementById('totalBookingsBox').innerText = history.length;
+
+        if (history.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="4" style="text-align:center; color: #a0a0a0; padding: 2rem;">No spending history yet.</td></tr>';
+        } else {
+            tbody.innerHTML = history.map(h => `
+            <tr>
+                <td style="font-weight: bold;">${h.service}</td>
+                <td style="color: #a0a0a0;">${h.date}</td>
+                <td>₹${h.amount}</td>
+                <td><span class="badge" style="margin:0; font-size: 0.8rem; background: rgba(255,170,0,0.1); color: #ffaa00;">${h.status}</span></td>
+            </tr>
+        `).join('');
+        }
+        if (DB.getCart().length > 0) document.getElementById('floatingCart').style.display = 'flex';
+    </script>
+</body>
+
+</html>
